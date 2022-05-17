@@ -4,7 +4,7 @@
   "description": "fc analise, uma startup da ficha certa",
   "main": "fc_analise.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "fcanalise"
@@ -14,5 +14,8 @@
   "dependencies": {
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }
