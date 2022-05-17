@@ -25,7 +25,13 @@ app.use(handlers.notFound)
 
 app.use(handlers.serverError)
 
-app.listen(port, () => console.log(
-    `Express started on http://localhost:${port}; `
-    + `press Ctrl+C to terminate.`
-))
+//if executed by node (node fcanalise.js), 
+//require.main === module; else, will be imported by other module
+if (require.main === module) {
+    app.listen(port, () => console.log(
+        `Express started on http://localhost:${port}; `
+        + `press Ctrl+C to terminate.`
+    ))
+} else {
+    module.exports = app
+}
