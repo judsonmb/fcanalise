@@ -4,7 +4,8 @@
   "description": "fc analise, uma startup da ficha certa",
   "main": "fc_analise.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint fcanalise.js lib"
   },
   "keywords": [
     "fcanalise"
@@ -16,6 +17,7 @@
     "express-handlebars": "^6.0.6"
   },
   "devDependencies": {
+    "eslint": "^8.15.0",
     "jest": "^28.1.0",
     "portfinder": "^1.0.28",
     "puppeteer": "^14.1.0"
