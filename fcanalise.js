@@ -21,7 +21,7 @@ app.use(weatherMiddleware)
 //routes
 app.use(express.static(__dirname + '/public'))
 
-app.get('/', handlers.home)
+app.get('/', handlers.login)
 
 app.get('/about', handlers.about)
 
