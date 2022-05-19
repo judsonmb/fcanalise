@@ -3,6 +3,7 @@ const handlers = require('./lib/handlers')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const weatherMiddleware = require('./lib/middleware/weather')
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -17,20 +18,24 @@ const port = process.env.PORT || 3000
 
 //middlewares
 app.use(weatherMiddleware)
-
-//routes
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/', handlers.login)
+//routes
+app.get('/', handlers.showLoginPage)
 
-app.get('/about', handlers.about)
+app.get('/home', handlers.showHomePage)
+
+app.post('/login', handlers.login)
+
+//must be called after all others
+app.use(handlers.serverError)
 
 app.use(handlers.notFound)
 
-app.use(handlers.serverError)
 
 //if executed by node (node fcanalise.js), 
-//require.main === module; else, will be imported by other module
+//require.main === module; else, will be imported by other module (for tests)
 if (require.main === module) {
     app.listen(port, () => console.log(
         `Express started on http://localhost:${port}; `
