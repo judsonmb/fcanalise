@@ -2,8 +2,11 @@
 const handlers = require('./lib/handlers')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
-const weatherMiddleware = require('./lib/middleware/weather')
 const bodyParser = require('body-parser')
+const { credentials } = require('./config')
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
+const flashMiddleware = require('./lib/middleware/flash')
 
 const app = express()
 
@@ -17,9 +20,15 @@ app.set('view engine', 'handlebars')
 const port = process.env.PORT || 3000
 
 //middlewares
-app.use(weatherMiddleware)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
+app.use(cookieParser(credentials.cookieSecret))
+app.use(expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret: credentials.cookieSecret
+}))
+app.use(flashMiddleware)
 
 //routes
 app.get('/', handlers.showLoginPage)
@@ -32,7 +41,6 @@ app.post('/login', handlers.login)
 app.use(handlers.serverError)
 
 app.use(handlers.notFound)
-
 
 //if executed by node (node fcanalise.js), 
 //require.main === module; else, will be imported by other module (for tests)
