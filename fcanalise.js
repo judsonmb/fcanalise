@@ -7,6 +7,7 @@ const { credentials } = require('./config')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const flashMiddleware = require('./lib/middleware/flash')
+const authMiddleware = require('./lib/middleware/auth')
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use(expressSession({
     secret: credentials.cookieSecret
 }))
 app.use(flashMiddleware)
+app.use(authMiddleware)
 
 //routes
 app.get('/', handlers.showLoginPage)
