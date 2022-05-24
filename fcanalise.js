@@ -1,13 +1,14 @@
 //to get routes,
-const handlers = require('./lib/handlers')
+const pages = require('./modules/pages')
+const userModule = require('./modules/user')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const { credentials } = require('./config')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-const flashMiddleware = require('./lib/middleware/flash')
-const authMiddleware = require('./lib/middleware/auth')
+const flashMiddleware = require('./middlewares/flash')
+const authMiddleware = require('./middlewares/auth')
 
 const app = express()
 
@@ -33,16 +34,18 @@ app.use(flashMiddleware)
 app.use(authMiddleware)
 
 //routes
-app.get('/', handlers.showLoginPage)
+app.get('/', pages.showLoginPage)
 
-app.get('/home', handlers.showHomePage)
+app.get('/home', pages.showHomePage)
 
-app.post('/login', handlers.login)
+app.post('/login', userModule.doLogin)
+
+app.get('/logout', userModule.doLogout)
 
 //must be called after all others
-app.use(handlers.serverError)
+app.use(pages.serverError)
 
-app.use(handlers.notFound)
+app.use(pages.notFound)
 
 //if executed by node (node fcanalise.js), 
 //require.main === module; else, will be imported by other module (for tests)
