@@ -5,7 +5,7 @@ exports.showLoginPage = (req, res) => {
 }
 
 exports.showHomePage = (req, res) => {
-    if (!req.session.auth) res.redirect(303, '/')
+    if (!req.session.auth) return res.redirect(303, '/')
     res.render('home')
 }
 
