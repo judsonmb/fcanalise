@@ -38,9 +38,9 @@ app.get('/', pages.showLoginPage)
 
 app.get('/home', pages.showHomePage)
 
-app.post('/login', userModule.doLogin)
+app.post('/login', userModule.login)
 
-app.get('/logout', userModule.doLogout)
+app.get('/logout', userModule.logout)
 
 //must be called after all others
 app.use(pages.serverError)
