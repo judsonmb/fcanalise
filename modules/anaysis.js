@@ -25,7 +25,8 @@ module.exports = {
                     location: {
                         search: 'Hood River, Oregon, USA'
                     }
-                }
+                },
+                risk: 'LOW'
             },
             {
                 id: 2,
@@ -34,14 +35,14 @@ module.exports = {
                     {
                         id: 3,
                         name: 'Ciclano de Tal',
-                        type: 'Guarantor',
-                        income: 8000
+                        type: 'Tenant',
+                        income: 3000
                     },
                     {
                         id: 4,
                         name: 'Zilano de Tal',
                         type: 'Tenant',
-                        income: 3000
+                        income: 2000
                     }
                 ],
                 tenancy: {
@@ -51,7 +52,8 @@ module.exports = {
                     location: {
                         search: 'Maceió, Alagoas, Brazil'
                     }
-                }
+                },
+                risk: 'MODERATE'
             },
         ]
         // if the option "status" will specified, only the 

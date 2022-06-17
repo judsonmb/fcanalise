@@ -13,6 +13,7 @@ const authMiddleware = require('./middlewares/auth')
 const morgan = require('morgan')
 const fs = require('fs')
 const cluster = require('cluster')
+const db = require('./db')
 
 const app = express()
 
